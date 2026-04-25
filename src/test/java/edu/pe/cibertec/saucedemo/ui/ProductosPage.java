@@ -1,6 +1,8 @@
 package edu.pe.cibertec.saucedemo.ui;
 
-public class ProductosPage {
+import net.serenitybdd.screenplay.targets.Target;
 
-    public static final String INVENTORY_ITEM = ".inventory_item";
+public class ProductosPage {
+    public static final Target PRODUCT_ITEMS =
+            Target.the("product items").locatedBy(".inventory_item");
 }
