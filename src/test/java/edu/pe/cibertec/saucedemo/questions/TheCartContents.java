@@ -3,23 +3,25 @@ package edu.pe.cibertec.saucedemo.questions;
 import edu.pe.cibertec.saucedemo.ui.CarritoPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import net.serenitybdd.screenplay.targets.Target;
+import net.serenitybdd.screenplay.playwright.abilities.BrowseTheWebWithPlaywright;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TheCartContents implements Question<List<String>> {
 
-    public static TheCartContents itemNames() {
+    public static TheCartContents displayed() {
         return new TheCartContents();
     }
 
     @Override
     public List<String> answeredBy(Actor actor) {
-        return Target.the("cart item names")
-                .locatedBy(CarritoPage.CART_ITEM_NAME)
-                .resolveAllFor(actor)
+        return BrowseTheWebWithPlaywright.as(actor)
+                .getCurrentPage()
+                .locator(CarritoPage.CART_ITEMS)
+                .allTextContents()
                 .stream()
-                .map(element -> element.getText().trim())
-                .toList();
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 }

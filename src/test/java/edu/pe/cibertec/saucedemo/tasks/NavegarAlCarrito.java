@@ -11,7 +11,7 @@ public class NavegarAlCarrito {
     public static Performable page() {
         return Task.where("{0} navigates to cart",
                 Click.on(Target.the("cart link")
-                        .locatedBy(CarritoPage.CART_LINK))
+                        .locatedBy(CarritoPage.CART_ICON))
         );
     }
 }

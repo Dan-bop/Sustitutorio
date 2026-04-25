@@ -1,8 +1,8 @@
 package edu.pe.cibertec.saucedemo.tasks;
 
-import edu.pe.cibertec.saucedemo.ui.ProductosPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
+import net.serenitybdd.screenplay.playwright.abilities.BrowseTheWebWithPlaywright;
 
 public class VerificarInventario implements Question<Integer> {
 
@@ -12,6 +12,10 @@ public class VerificarInventario implements Question<Integer> {
 
     @Override
     public Integer answeredBy(Actor actor) {
-        return ProductosPage.PRODUCT_ITEMS.resolveAllFor(actor).size();
+
+        return BrowseTheWebWithPlaywright.as(actor)
+                .getCurrentPage()
+                .locator(".inventory_item") // Selector directo
+                .count();
     }
 }

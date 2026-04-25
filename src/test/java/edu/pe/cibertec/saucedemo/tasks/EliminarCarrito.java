@@ -4,8 +4,8 @@ import edu.pe.cibertec.saucedemo.ui.CarritoPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
-import net.serenitybdd.screenplay.targets.Target;
-import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.playwright.Target;
+import net.serenitybdd.screenplay.playwright.interactions.Click;
 
 public class EliminarCarrito implements Task {
 
@@ -15,12 +15,14 @@ public class EliminarCarrito implements Task {
         this.productName = productName;
     }
 
-    public static EliminarCarrito conNombre(String productName) {
+
+    public static EliminarCarrito producto(String productName) {
         return Tasks.instrumented(EliminarCarrito.class, productName);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+
         Target boton = Target.the("remove from cart button")
                 .locatedBy(CarritoPage.removeFromCartButton(productName));
 
